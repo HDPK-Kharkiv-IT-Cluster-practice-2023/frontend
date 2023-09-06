@@ -9,13 +9,6 @@ function App() {
     const [luck, setLuck] = useState(50);
     const [result, setResult] = useState('');
 
-   /* const handleSubmit = (e) => {
-        e.preventDefault();
-        // Здесь вы можете выполнить логику, основанную на введенных данных
-        // Например, создать бойца с этими характеристиками
-        // и отобразить результат в переменной result
-    };*/
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
