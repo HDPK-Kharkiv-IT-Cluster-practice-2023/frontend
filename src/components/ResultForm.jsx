@@ -3,7 +3,7 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 
-function ResultForm({ formValues }) {
+function ResultForm({ formValues, submitted  }) {
     return (
         <Card sx={{
             borderRadius: '24px',
@@ -21,12 +21,18 @@ function ResultForm({ formValues }) {
                 <Typography sx={{fontSize: 50, textAlign: 'center'}}>
                     Result
                 </Typography>
-                <p>Name: {formValues.name}</p>
-                <p>Attack: {formValues.attack}</p>
-                <p>Armor: {formValues.armor}</p>
-                <p>Health: {formValues.health}</p>
-                <p>Critical attack: {formValues.criticalAttack}</p>
-                <p>Luck: {formValues.luck}</p>
+                {submitted ? (
+                    <>
+                        <p>Name: {formValues.name}</p>
+                        <p>Attack: {formValues.attack}</p>
+                        <p>Armor: {formValues.armor}</p>
+                        <p>Health: {formValues.health}</p>
+                        <p>Critical attack: {formValues.criticalAttack}</p>
+                        <p>Luck: {formValues.luck}</p>
+                    </>
+                ) : (
+                    <p>Please submit the form to see the result.</p>
+                )}
             </CardContent>
         </Card>
     )

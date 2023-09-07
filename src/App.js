@@ -13,15 +13,18 @@ function App() {
         luck: 0,
     });
 
+    const [submitted, setSubmitted] = useState(false);
+
     const handleFirstFormSubmit = (values) => {
         setFormValues(values);
+        setSubmitted(true);
     };
 
     return (
         <Box padding="44px 0 44px 0">
             <Stack direction="row" spacing={2} justifyContent="center">
                 <CreationFormCard onSubmit={handleFirstFormSubmit} initialValues={formValues} />
-                <ResultForm formValues={formValues} />
+                <ResultForm formValues={formValues} submitted={submitted} />
             </Stack>
         </Box>
     );
