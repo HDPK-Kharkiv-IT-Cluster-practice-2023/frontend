@@ -3,37 +3,23 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import Card from "@mui/material/Card";
-import {Box, Button, Grid, Slider, TextField} from "@mui/material";
+import {Button, Grid, Slider, TextField} from "@mui/material";
 
-function CreationFormCard(props) {
-    const [name, setName] = useState('');
-    const [attack, setAttack] = useState(10);
-    const [armor, setArmor] = useState(5);
-    const [health, setHealth] = useState(75);
-    const [criticalAttack, setCriticalAttack] = useState(5);
-    const [luck, setLuck] = useState(5);
+function CreationFormCard({ onSubmit, initialValues }) {
+    const [values, setValues] = useState(initialValues);
 
-    const handleNameChange = (newValue) => {
-        setName(newValue);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setValues({ ...values, [name]: value });
     };
-    const handleAttackChange = (newValue) => {
-        setAttack(newValue);
-    };
-    const handleArmorChange = (newValue) => {
-        setArmor(newValue);
-    };
-    const handleHealthChange = (newValue) => {
-        setHealth(newValue);
-    };
-    const handleCriticalAttackChange = (newValue) => {
-        setCriticalAttack(newValue);
-    };
-    const handleLuckAttackChange = (newValue) => {
-        setLuck(newValue);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onSubmit(values);
     };
 
     return (
-        <Box p={2}>
+        <form onSubmit={handleSubmit}>
             <Card sx={{
                 borderRadius: '24px',
                 width: 600,
@@ -54,11 +40,12 @@ function CreationFormCard(props) {
                         Name
                     </Typography>
                     <TextField
-                        value={name}
-                        onChange={(e, newValue) => handleNameChange(newValue)}
+                        id="name"
+                        name="name"
+                        value={values.name}
+                        onChange={handleChange}
                         fullWidth
                         variant="outlined"
-                        label=""
                         margin="normal"
                         InputProps={{
                             style: {
@@ -85,8 +72,10 @@ function CreationFormCard(props) {
                         </Grid>
                         <Grid item xs={8}>
                             <Slider
-                                value={attack}
-                                onChange={(e, newValue) => handleAttackChange(newValue)}
+                                id="attack"
+                                name="attack"
+                                value={values.attack}
+                                onChange={handleChange}
                                 valueLabelDisplay="auto"
                                 min={5}
                                 max={20}
@@ -96,8 +85,10 @@ function CreationFormCard(props) {
                         </Grid>
                         <Grid item xs={2}>
                             <TextField
-                                value={attack}
-                                onChange={(e) => handleAttackChange(e.target.value)}
+                                id="attack"
+                                name="attack"
+                                value={values.attack}
+                                onChange={handleChange}
                                 type="number"
                                 InputProps={{
                                     inputProps: { min: 5, max: 20 },
@@ -119,8 +110,10 @@ function CreationFormCard(props) {
                         </Grid>
                         <Grid item xs={8}>
                             <Slider
-                                value={armor}
-                                onChange={(e, newValue) => handleArmorChange(newValue)}
+                                id="armor"
+                                name="armor"
+                                value={values.armor}
+                                onChange={handleChange}
                                 valueLabelDisplay="auto"
                                 min={1}
                                 max={10}
@@ -130,8 +123,10 @@ function CreationFormCard(props) {
                         </Grid>
                         <Grid item xs={2}>
                             <TextField
-                                value={armor}
-                                onChange={(e) => handleArmorChange(e.target.value)}
+                                id="armor"
+                                name="armor"
+                                value={values.armor}
+                                onChange={handleChange}
                                 type="number"
                                 InputProps={{
                                     inputProps: { min: 1, max: 10 },
@@ -153,8 +148,10 @@ function CreationFormCard(props) {
                         </Grid>
                         <Grid item xs={8}>
                             <Slider
-                                value={health}
-                                onChange={(e, newValue) => handleHealthChange(newValue)}
+                                id="health"
+                                name="health"
+                                value={values.health}
+                                onChange={handleChange}
                                 valueLabelDisplay="auto"
                                 min={50}
                                 max={100}
@@ -164,8 +161,10 @@ function CreationFormCard(props) {
                         </Grid>
                         <Grid item xs={2}>
                             <TextField
-                                value={health}
-                                onChange={(e) => handleHealthChange(e.target.value)}
+                                id="health"
+                                name="health"
+                                value={values.health}
+                                onChange={handleChange}
                                 type="number"
                                 InputProps={{
                                     inputProps: { min: 50, max: 100 },
@@ -187,8 +186,10 @@ function CreationFormCard(props) {
                         </Grid>
                         <Grid item xs={8}>
                             <Slider
-                                value={criticalAttack}
-                                onChange={(e, newValue) => handleCriticalAttackChange(newValue)}
+                                id="criticalAttack"
+                                name="criticalAttack"
+                                value={values.criticalAttack}
+                                onChange={handleChange}
                                 valueLabelDisplay="auto"
                                 min={1}
                                 max={10}
@@ -198,8 +199,10 @@ function CreationFormCard(props) {
                         </Grid>
                         <Grid item xs={2}>
                             <TextField
-                                value={criticalAttack}
-                                onChange={(e) => handleCriticalAttackChange(e.target.value)}
+                                id="criticalAttack"
+                                name="criticalAttack"
+                                value={values.criticalAttack}
+                                onChange={handleChange}
                                 type="number"
                                 InputProps={{
                                     inputProps: { min: 1, max: 10 },
@@ -221,8 +224,10 @@ function CreationFormCard(props) {
                         </Grid>
                         <Grid item xs={8}>
                             <Slider
-                                value={luck}
-                                onChange={(e, newValue) => handleLuckAttackChange(newValue)}
+                                id="luck"
+                                name="luck"
+                                value={values.luck}
+                                onChange={handleChange}
                                 valueLabelDisplay="auto"
                                 min={1}
                                 max={10}
@@ -232,8 +237,10 @@ function CreationFormCard(props) {
                         </Grid>
                         <Grid item xs={2}>
                             <TextField
-                                value={luck}
-                                onChange={(e) => handleLuckAttackChange(e.target.value)}
+                                id="luck"
+                                name="luck"
+                                value={values.luck}
+                                onChange={handleChange}
                                 type="number"
                                 InputProps={{
                                     inputProps: { min: 1, max: 10 },
@@ -246,10 +253,10 @@ function CreationFormCard(props) {
                     </Grid>
                 </CardContent>
                 <CardActions>
-                    <Button variant="contained" color="orange">Generate</Button>
+                    <Button type="submit" variant="contained" color="orange">Generate</Button>
                 </CardActions>
             </Card>
-        </Box>
+        </form>
     )
 }
 export default CreationFormCard;
