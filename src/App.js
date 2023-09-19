@@ -25,6 +25,7 @@ function App() {
             <Stack direction="row" spacing={2} justifyContent="center">
                 <CreationFormCard onSubmit={handleFirstFormSubmit} initialValues={formValues} />
                 <ResultForm formValues={formValues} submitted={submitted} />
+
             </Stack>
         </Box>
     );
