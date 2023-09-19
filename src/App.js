@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import CreationFormCard from "./components/CreationFormCard";
 import {Box, Stack} from "@mui/material";
 import ResultForm from "./components/ResultForm";
@@ -14,19 +14,6 @@ function App() {
     });
 
     const [submitted, setSubmitted] = useState(false);
-
-    const [data, setData] = useState([{}]);
-
-    useEffect(() => {
-        fetch("http://localhost:5000/").then(
-            res => res.json()
-        ).then(
-            data => {
-                setData(data)
-                console.log(data)
-            }
-        )
-    }, []);
 
     const handleFirstFormSubmit = (values) => {
         setFormValues(values);
