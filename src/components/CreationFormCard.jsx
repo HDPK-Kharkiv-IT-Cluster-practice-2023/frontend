@@ -6,12 +6,35 @@ import Card from "@mui/material/Card";
 import {Button, Grid, Slider, TextField} from "@mui/material";
 
 function CreationFormCard({onSubmit, initialValues}) {
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     const [values, setValues] = useState(initialValues);
 
     const handleChange = (e) => {
         const {name, value} = e.target;
         setValues({...values, [name]: value});
     };
+
+    const handleGenerateClick = async () => {
+        try {
+            const response = await fetch(`${apiUrl}/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(values),
+            });
+
+            if (response.ok) {
+                console.log(await response.json());
+                onSubmit(values);
+            } else {
+                console.error("Server returned an error:", response.status);
+            }
+        } catch (error) {
+            console.error("Error when sending a request:", error);
+        }
+    }
 
     return (
         <Card sx={{
@@ -247,24 +270,10 @@ function CreationFormCard({onSubmit, initialValues}) {
                 </Grid>
             </CardContent>
             <CardActions>
-                <Button onClick={async () => {
-                    await fetch('http://localhost:5000/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(values)
-                    })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            console.log(data);
-                            onSubmit(values);
-                        })
-                        .catch((error) => {
-                            console.error('Error when sending a request:', error);
-                        });
-                }}
-                        variant="contained" color="orange">
+                <Button onClick={handleGenerateClick}
+                        variant="contained"
+                        color="orange"
+                >
                     Generate
                 </Button>
             </CardActions>
