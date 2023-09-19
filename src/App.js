@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CreationFormCard from "./components/CreationFormCard";
 import {Box, Stack} from "@mui/material";
 import ResultForm from "./components/ResultForm";
@@ -15,6 +15,19 @@ function App() {
 
     const [submitted, setSubmitted] = useState(false);
 
+    const [data, setData] = useState([{}]);
+
+    useEffect(() => {
+        fetch("http://localhost:5000/").then(
+            res => res.json()
+        ).then(
+            data => {
+                setData(data)
+                console.log(data)
+            }
+        )
+    }, []);
+
     const handleFirstFormSubmit = (values) => {
         setFormValues(values);
         setSubmitted(true);
@@ -25,6 +38,7 @@ function App() {
             <Stack direction="row" spacing={2} justifyContent="center">
                 <CreationFormCard onSubmit={handleFirstFormSubmit} initialValues={formValues} />
                 <ResultForm formValues={formValues} submitted={submitted} />
+
             </Stack>
         </Box>
     );
